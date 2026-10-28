@@ -1,3 +1,5 @@
+import random
+
 import torch
 from torch.optim import lr_scheduler
 from torch.utils import data
@@ -37,6 +39,12 @@ def train(config):
     print('using config:', config)
     train_cfg = config['train']
     wandb_cfg = config['wandb']
+    seed = train_cfg.get('seed')
+    if seed is not None:
+        random.seed(seed)
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
     if wandb_cfg['use_wandb']:
         wandb.init(project=wandb_cfg['wandb_project'], config=config)
     

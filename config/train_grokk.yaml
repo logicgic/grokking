@@ -12,6 +12,7 @@ model:
     pre_norm: true
 
 train:
+  seed: 0
   num_workers: 0
   bsize: 512
   lr: 1e-3

@@ -70,6 +70,24 @@ class ModDivisonDataset(AbstractDataset):
     def fetch_output(self, a, b):
         return (a * pow(b, self.p-2, self.p)) % self.p
 
+class ModPolynomialDataset(AbstractDataset):
+    """Non-symmetric polynomial operation used in the paper's discussion."""
+    def __init__(self, p, frac_train):
+        super(ModPolynomialDataset, self).__init__(set(range(p)), set(range(p)), frac_train)
+        self.p = p
+
+    def fetch_output(self, a, b):
+        return (a**3 + a * b**2 + b) % self.p
+
+class ModSymmetricPolynomialDataset(AbstractDataset):
+    """Symmetric polynomial baseline with comparable input interactions."""
+    def __init__(self, p, frac_train):
+        super(ModSymmetricPolynomialDataset, self).__init__(set(range(p)), set(range(p)), frac_train)
+        self.p = p
+
+    def fetch_output(self, a, b):
+        return (a**2 + a * b + b**2) % self.p
+
 class PermutationGroup(AbstractDataset):
     def __init__(self, k, frac_train):
         perms = set(map(tuple, permutations(list(range(k)))))

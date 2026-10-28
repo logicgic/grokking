@@ -1,5 +1,5 @@
 import torch
-from datasets import ModSumDataset, ModSubtractDataset, ModDivisonDataset, PermutationGroup
+from datasets import ModSumDataset, ModSubtractDataset, ModDivisonDataset, ModPolynomialDataset, ModSymmetricPolynomialDataset, PermutationGroup
 from grokk_model import GrokkModel
 from utils import convert_path
 registry = {}
@@ -30,6 +30,14 @@ def load_mod_subtract_dataset(config, verbose=True):
 @register('mod_division_dataset')
 def load_mod_subtract_dataset(config, verbose=True):
     return ModDivisonDataset(config['p'], config['frac_train'])
+
+@register('mod_polynomial_dataset')
+def load_mod_polynomial_dataset(config, verbose=True):
+    return ModPolynomialDataset(config['p'], config['frac_train'])
+
+@register('mod_symmetric_polynomial_dataset')
+def load_mod_symmetric_polynomial_dataset(config, verbose=True):
+    return ModSymmetricPolynomialDataset(config['p'], config['frac_train'])
 
 @register('permutation_group_dataset')
 def load_mod_subtract_dataset(config, verbose=True):
