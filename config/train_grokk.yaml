@@ -22,6 +22,9 @@ train:
   eval_every: 10
   eval_batches: 8
   max_steps: 1e6
+  save_every: 10000
+  checkpoint_dir: checkpoints
+  resume_from: null
 
 wandb:
   use_wandb: true
